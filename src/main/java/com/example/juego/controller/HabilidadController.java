@@ -84,4 +84,16 @@ public class HabilidadController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarHabilidad(@PathVariable int id) {
+
+        boolean eliminado = habilidadesGuardadas.removeIf(habilidad -> habilidad.getId() == id);
+
+        if (eliminado) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }
